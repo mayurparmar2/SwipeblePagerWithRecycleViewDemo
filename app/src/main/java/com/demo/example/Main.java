@@ -3,6 +3,8 @@ package com.demo.example;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +13,9 @@ class Main {
         String myname = "Something";
 
         System.out.println(getReversStr(myname));
+
+        TextView De = null;
+        int i = (De.getVisibility()  == View.GONE)?View.VISIBLE:View.GONE;
     }
 
 

@@ -7,12 +7,16 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="50dp"
-        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="true"
+
         >
         <androidx.constraintlayout.widget.ConstraintLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
@@ -28,10 +32,11 @@
 
             <ImageView
                 android:id="@+id/expandCollapseIcon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/icon200"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
                 android:contentDescription="@string/app_name"
+                android:src="@drawable/icon200"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/rtoName"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -46,41 +51,54 @@
 <!--                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"-->
 <!--                app:layout_constraintTop_toBottomOf="@+id/rtoName" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/rtoAddress"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:padding="8dp"-->
-<!--                android:textSize="16sp"-->
-<!--                android:text="Rto Name: some name"-->
 
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/rtoName" />-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/hideConstraint"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rtoName"
+                android:animateLayoutChanges="true"
+                >
 
-<!--            <TextView-->
-<!--                android:id="@+id/rtoPhone"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:padding="8dp"-->
-<!--                android:textSize="16sp"-->
-<!--                android:text="Rto Name: some name"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
+                <TextView
+                    android:id="@+id/rtoAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="Rto Name: some name"
+                    android:textSize="16sp"
 
-<!--                app:layout_constraintTop_toBottomOf="@+id/rtoAddress" />-->
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/rtoPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:text="Rto Name: some name"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    app:layout_constraintTop_toBottomOf="@+id/rtoAddress" />
 
 
-<!--            <TextView-->
-<!--                android:id="@+id/rtoWebsite"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:padding="8dp"-->
-<!--                android:textSize="16sp"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                android:text="Rto Name: some name"-->
+                <TextView
+                    android:id="@+id/rtoWebsite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="Rto Name: some name"
 
-<!--                app:layout_constraintTop_toBottomOf="@+id/rtoPhone"-->
-<!--                />-->
+                    app:layout_constraintTop_toBottomOf="@+id/rtoPhone"
+                    />
 
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

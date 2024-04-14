@@ -1,11 +1,17 @@
 package com.demo.example.adapter
 
+import android.animation.LayoutTransition
 import android.content.Context
+import android.transition.AutoTransition
+import android.transition.Transition
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.example.RTO
 import com.demo.example.State
@@ -20,29 +26,15 @@ class RecycleViewStateAdapter(val context: Context, rtoList: State) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RTOViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(com.demo.example.R.layout.item_rto, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(com.demo.example.R.layout.item_rto, parent, false)
         return RTOViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RTOViewHolder, position: Int) {
         holder.rtoName.setText(rtoList[position].name)
-
-
-        holder.expandCollapseIcon.rotation = if (isExpanded) 180f else 0f
-        holder.itemView.setOnClickListener { v ->
-            toggleItemExpansion(position)
-            notifyItemChanged(position)
-        }
-//        holder.expandableListView.setAdapter(ExpandableListAdapter(context, item))
-//        val mm :ExpandableListAdapter = ExpandableListAdapter(context,expandableListTitle,expandableListTitle)
-//        holder.expandableListView.setAdapter(object : ExpandableListAdapter{
-//
-//        })
-//        holder.expandableListView.setText(rtoList[position].name)
-//        holder.rtoAddress.setText(rtoList[position].address)
-//        holder.rtoPhone.setText(rtoList[position].phone)
-//        holder.rtoWebsite.setText(rtoList[position].website)
+        holder.rtoAddress.setText(rtoList[position].address)
+        holder.rtoPhone.setText(rtoList[position].phone)
+        holder.rtoWebsite.setText(rtoList[position].website)
     }
 
     override fun getItemCount(): Int {
@@ -53,20 +45,28 @@ class RecycleViewStateAdapter(val context: Context, rtoList: State) :
         var rtoName: TextView
         var expandCollapseIcon: ImageView
 //        var expandableListAdapter: com.demo.example.adapter.ExpandableListAdapter
-//        var rtoAddress: TextView
-//        var rtoPhone: TextView
-//        var rtoWebsite: TextView
+        var rtoAddress: TextView
+        var rtoPhone: TextView
+        var rtoWebsite: TextView
+        var cardView: CardView
+        var hideConstraint: ConstraintLayout
 
         init {
             rtoName = itemView.findViewById<TextView>(com.demo.example.R.id.rtoName)
             expandCollapseIcon = itemView.findViewById<ImageView>(com.demo.example.R.id.expandCollapseIcon)
+            cardView = itemView.findViewById<CardView>(com.demo.example.R.id.cardView)
+            hideConstraint = itemView.findViewById<ConstraintLayout>(com.demo.example.R.id.hideConstraint)
 
-//            expandableListAdapter = RTOExpandableListAdapter(itemView.context);
-//            expandableListView.setAdapter(expandableListAdapter);
+            hideConstraint.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 
-//            rtoAddress = itemView.findViewById<TextView>(com.demo.example.R.id.rtoAddress)
-//            rtoPhone = itemView.findViewById<TextView>(com.demo.example.R.id.rtoPhone)
-//            rtoWebsite = itemView.findViewById<TextView>(com.demo.example.R.id.rtoWebsite)
+            cardView.setOnClickListener(View.OnClickListener {
+                val i = if (hideConstraint.getVisibility() == View.GONE) View.VISIBLE else View.GONE
+                TransitionManager.beginDelayedTransition(hideConstraint,AutoTransition());
+                hideConstraint.visibility = i
+            })
+            rtoAddress = itemView.findViewById<TextView>(com.demo.example.R.id.rtoAddress)
+            rtoPhone = itemView.findViewById<TextView>(com.demo.example.R.id.rtoPhone)
+            rtoWebsite = itemView.findViewById<TextView>(com.demo.example.R.id.rtoWebsite)
         }
     }
 }
